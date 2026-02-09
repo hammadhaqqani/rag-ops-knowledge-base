@@ -1,6 +1,5 @@
 """Document loader for various file formats."""
 
-import os
 import logging
 from pathlib import Path
 from typing import Dict, Optional

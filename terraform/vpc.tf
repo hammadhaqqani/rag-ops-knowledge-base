@@ -64,7 +64,7 @@ resource "aws_vpc_endpoint" "opensearch" {
 
   vpc_id              = aws_vpc.rag_ops_vpc[0].id
   service_name        = "com.amazonaws.${var.aws_region}.aoss"
-  vpc_endpoint_type   = "interface"
+  vpc_endpoint_type   = "Interface"
   subnet_ids          = aws_subnet.rag_ops_subnet[*].id
   security_group_ids  = [aws_security_group.opensearch_endpoint[0].id]
   private_dns_enabled = true

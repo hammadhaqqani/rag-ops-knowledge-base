@@ -2,7 +2,6 @@
 
 import logging
 from typing import Dict, List, Optional, Any
-import json
 
 import boto3
 from opensearchpy import OpenSearch, RequestsHttpConnection

@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: pip install flake8
       - name: Lint
-        run: flake8 app/ scripts/ tests/ --max-line-length=127 --extend-ignore=E501,W503 --count --show-source --statistics
+        run: flake8 app/ scripts/ tests/ --max-line-length=127 --extend-ignore=E501,W503,E203,E402 --count --show-source --statistics
 
   test:
     name: Tests

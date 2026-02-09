@@ -1,7 +1,7 @@
 """Tests for search module."""
 
 import pytest
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import AsyncMock
 
 from app.retrieval.search import SemanticSearch
 from app.retrieval.opensearch import OpenSearchClient
