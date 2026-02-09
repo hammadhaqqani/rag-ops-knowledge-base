@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  rag-ops-api:
+    build: .
+    container_name: rag-ops-api
+    ports:
+      - "8000:8000"
+    environment:
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - OPENSEARCH_COLLECTION_ENDPOINT=${OPENSEARCH_COLLECTION_ENDPOINT}
+      - OPENSEARCH_INDEX_NAME=${OPENSEARCH_INDEX_NAME:-rag-ops-kb}
+      - BEDROCK_MODEL_ID=${BEDROCK_MODEL_ID:-anthropic.claude-v2}
+      - BEDROCK_EMBEDDING_MODEL_ID=${BEDROCK_EMBEDDING_MODEL_ID:-amazon.titan-embed-text-v1}
+      - CHUNK_SIZE=${CHUNK_SIZE:-1000}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP:-200}
+      - MAX_SEARCH_RESULTS=${MAX_SEARCH_RESULTS:-5}
+      - MIN_SIMILARITY_SCORE=${MIN_SIMILARITY_SCORE:-0.7}
+    volumes:
+      - ./data:/app/data:ro
+      - ~/.aws:/root/.aws:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
