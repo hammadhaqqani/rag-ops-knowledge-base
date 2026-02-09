@@ -71,6 +71,7 @@ async def ingest_document(
         logger.info("Generating embeddings and indexing...")
         chunks_indexed = 0
         import time
+
         document_id = f"doc_{int(time.time())}"
 
         for idx, chunk in enumerate(chunks):

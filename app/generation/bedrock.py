@@ -60,20 +60,26 @@ class BedrockLLM:
             logger.error(f"Error generating text: {e}", exc_info=True)
             raise
 
-    async def _generate_claude(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+    async def _generate_claude(
+        self, prompt: str, system_prompt: Optional[str] = None
+    ) -> str:
         """Generate text using Claude model."""
         messages = []
 
         if system_prompt:
-            messages.append({
-                "role": "user",
-                "content": system_prompt,
-            })
+            messages.append(
+                {
+                    "role": "user",
+                    "content": system_prompt,
+                }
+            )
 
-        messages.append({
-            "role": "user",
-            "content": prompt,
-        })
+        messages.append(
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        )
 
         body = {
             "anthropic_version": "bedrock-2023-05-31",
@@ -97,7 +103,9 @@ class BedrockLLM:
         else:
             raise ValueError("Unexpected response format from Claude")
 
-    async def _generate_generic(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+    async def _generate_generic(
+        self, prompt: str, system_prompt: Optional[str] = None
+    ) -> str:
         """Generate text using generic model format."""
         body = {
             "prompt": prompt,
@@ -135,7 +143,9 @@ class BedrockLLM:
             response = bedrock_client.list_foundation_models()
 
             # Check if our model is in the list
-            model_ids = [model["modelId"] for model in response.get("modelSummaries", [])]
+            model_ids = [
+                model["modelId"] for model in response.get("modelSummaries", [])
+            ]
             return self.model_id in model_ids
 
         except Exception as e:

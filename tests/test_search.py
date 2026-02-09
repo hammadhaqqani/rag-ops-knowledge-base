@@ -19,22 +19,24 @@ async def test_semantic_search():
     mock_embeddings.embed_text = AsyncMock(return_value=[0.1] * 1536)
 
     # Mock search results
-    mock_opensearch.search = AsyncMock(return_value=[
-        {
-            "chunk_id": "chunk_1",
-            "text": "Test content 1",
-            "score": 0.85,
-            "document": "test.md",
-            "metadata": {},
-        },
-        {
-            "chunk_id": "chunk_2",
-            "text": "Test content 2",
-            "score": 0.75,
-            "document": "test2.md",
-            "metadata": {},
-        },
-    ])
+    mock_opensearch.search = AsyncMock(
+        return_value=[
+            {
+                "chunk_id": "chunk_1",
+                "text": "Test content 1",
+                "score": 0.85,
+                "document": "test.md",
+                "metadata": {},
+            },
+            {
+                "chunk_id": "chunk_2",
+                "text": "Test content 2",
+                "score": 0.75,
+                "document": "test2.md",
+                "metadata": {},
+            },
+        ]
+    )
 
     # Create search instance
     search = SemanticSearch(

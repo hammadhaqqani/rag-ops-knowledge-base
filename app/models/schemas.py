@@ -19,17 +19,27 @@ class QueryRequest(BaseModel):
     """Request model for querying the knowledge base."""
 
     query: str = Field(..., min_length=1, description="Natural language query")
-    max_results: Optional[int] = Field(5, ge=1, le=20, description="Maximum number of results")
-    min_score: Optional[float] = Field(0.7, ge=0.0, le=1.0, description="Minimum similarity score")
-    include_metadata: Optional[bool] = Field(True, description="Include metadata in response")
+    max_results: Optional[int] = Field(
+        5, ge=1, le=20, description="Maximum number of results"
+    )
+    min_score: Optional[float] = Field(
+        0.7, ge=0.0, le=1.0, description="Minimum similarity score"
+    )
+    include_metadata: Optional[bool] = Field(
+        True, description="Include metadata in response"
+    )
 
 
 class QueryResponse(BaseModel):
     """Response model for query results."""
 
     answer: str = Field(..., description="Generated answer from the knowledge base")
-    sources: List[Source] = Field(..., description="Source documents used for the answer")
-    query_time_ms: float = Field(..., description="Query execution time in milliseconds")
+    sources: List[Source] = Field(
+        ..., description="Source documents used for the answer"
+    )
+    query_time_ms: float = Field(
+        ..., description="Query execution time in milliseconds"
+    )
     total_results: int = Field(..., description="Total number of results found")
 
 
@@ -49,8 +59,12 @@ class IngestRequest(BaseModel):
     """Request model for ingesting documents."""
 
     document_path: str = Field(..., description="Path to the document file")
-    metadata: Optional[Dict[str, Any]] = Field(None, description="Additional metadata for the document")
-    chunk_strategy: Optional[str] = Field("fixed", description="Chunking strategy: 'fixed' or 'semantic'")
+    metadata: Optional[Dict[str, Any]] = Field(
+        None, description="Additional metadata for the document"
+    )
+    chunk_strategy: Optional[str] = Field(
+        "fixed", description="Chunking strategy: 'fixed' or 'semantic'"
+    )
 
 
 class IngestResponse(BaseModel):
@@ -68,4 +82,6 @@ class HealthResponse(BaseModel):
     status: str = Field(..., description="Service status")
     opensearch_connected: bool = Field(..., description="OpenSearch connection status")
     bedrock_available: bool = Field(..., description="Bedrock availability status")
-    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Health check timestamp")
+    timestamp: datetime = Field(
+        default_factory=datetime.utcnow, description="Health check timestamp"
+    )

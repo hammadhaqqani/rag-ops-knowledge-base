@@ -201,7 +201,11 @@ Answer:""",
                 document=result.get("document", "unknown"),
                 chunk_id=result.get("chunk_id", ""),
                 score=result.get("score", 0.0),
-                content=result.get("content", "")[:500] + "..." if len(result.get("content", "")) > 500 else result.get("content", ""),
+                content=(
+                    result.get("content", "")[:500] + "..."
+                    if len(result.get("content", "")) > 500
+                    else result.get("content", "")
+                ),
                 metadata=result.get("metadata"),
             )
             for result in search_results
@@ -227,7 +231,12 @@ Answer:""",
 @app.post("/ingest", response_model=IngestResponse, tags=["Ingest"])
 async def ingest_document(request: IngestRequest):
     """Ingest a document into the knowledge base."""
-    if not document_loader or not chunker or not bedrock_embeddings or not opensearch_client:
+    if (
+        not document_loader
+        or not chunker
+        or not bedrock_embeddings
+        or not opensearch_client
+    ):
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Service not initialized",
@@ -274,7 +283,9 @@ async def ingest_document(request: IngestRequest):
                 metadata={
                     "document_id": document_id,
                     "chunk_index": idx,
-                    "document_name": chunk.get("metadata", {}).get("document_name", request.document_path),
+                    "document_name": chunk.get("metadata", {}).get(
+                        "document_name", request.document_path
+                    ),
                     **(chunk.get("metadata", {})),
                 },
             )

@@ -109,7 +109,10 @@ class DocumentLoader:
 
         documents = []
         for file_path in path.rglob("*"):
-            if file_path.is_file() and file_path.suffix.lower() in self.SUPPORTED_EXTENSIONS:
+            if (
+                file_path.is_file()
+                and file_path.suffix.lower() in self.SUPPORTED_EXTENSIONS
+            ):
                 doc = await self.load(str(file_path))
                 if doc:
                     documents.append(doc)

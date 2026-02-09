@@ -103,9 +103,7 @@ Answer:"""
 
 async def main():
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="Query RAG Ops Knowledge Base"
-    )
+    parser = argparse.ArgumentParser(description="Query RAG Ops Knowledge Base")
     parser.add_argument(
         "query",
         type=str,

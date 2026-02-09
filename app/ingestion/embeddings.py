@@ -12,7 +12,9 @@ logger = logging.getLogger(__name__)
 class BedrockEmbeddings:
     """Generate embeddings using AWS Bedrock."""
 
-    def __init__(self, model_id: str = "amazon.titan-embed-text-v1", region: str = "us-east-1"):
+    def __init__(
+        self, model_id: str = "amazon.titan-embed-text-v1", region: str = "us-east-1"
+    ):
         """
         Initialize Bedrock embeddings client.
 
@@ -54,6 +56,7 @@ class BedrockEmbeddings:
             )
 
             import json
+
             response_body = json.loads(response["body"].read())
 
             # Extract embedding based on model response format

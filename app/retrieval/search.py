@@ -61,15 +61,19 @@ class SemanticSearch:
             # Format results
             formatted_results = []
             for result in results:
-                formatted_results.append({
-                    "chunk_id": result.get("chunk_id"),
-                    "content": result.get("text", ""),
-                    "score": result.get("score", 0.0),
-                    "document": result.get("document", "unknown"),
-                    "metadata": result.get("metadata", {}),
-                })
+                formatted_results.append(
+                    {
+                        "chunk_id": result.get("chunk_id"),
+                        "content": result.get("text", ""),
+                        "score": result.get("score", 0.0),
+                        "document": result.get("document", "unknown"),
+                        "metadata": result.get("metadata", {}),
+                    }
+                )
 
-            logger.info(f"Found {len(formatted_results)} results for query: {query[:50]}...")
+            logger.info(
+                f"Found {len(formatted_results)} results for query: {query[:50]}..."
+            )
             return formatted_results
 
         except Exception as e:

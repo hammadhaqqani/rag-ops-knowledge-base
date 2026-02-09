@@ -178,13 +178,17 @@ class OpenSearchClient:
             for hit in response.get("hits", {}).get("hits", []):
                 score = hit.get("_score", 0.0)
                 if score >= min_score:
-                    results.append({
-                        "chunk_id": hit.get("_id"),
-                        "text": hit.get("_source", {}).get("text", ""),
-                        "score": float(score),
-                        "metadata": hit.get("_source", {}).get("metadata", {}),
-                        "document": hit.get("_source", {}).get("metadata", {}).get("document_name", "unknown"),
-                    })
+                    results.append(
+                        {
+                            "chunk_id": hit.get("_id"),
+                            "text": hit.get("_source", {}).get("text", ""),
+                            "score": float(score),
+                            "metadata": hit.get("_source", {}).get("metadata", {}),
+                            "document": hit.get("_source", {})
+                            .get("metadata", {})
+                            .get("document_name", "unknown"),
+                        }
+                    )
 
             return results
 
