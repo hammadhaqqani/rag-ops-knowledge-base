@@ -1,5 +1,7 @@
 # RAG Ops Knowledge Base
 
+[![CI](https://github.com/hammadhaqqani/rag-ops-knowledge-base/actions/workflows/ci.yml/badge.svg)](https://github.com/hammadhaqqani/rag-ops-knowledge-base/actions/workflows/ci.yml)
+[![GitHub Pages](https://github.com/hammadhaqqani/rag-ops-knowledge-base/actions/workflows/pages.yml/badge.svg)](https://hammadhaqqani.github.io/rag-ops-knowledge-base/)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-green.svg)
